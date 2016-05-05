@@ -12,10 +12,82 @@
 body {
 	font-size: 1rem;
 	font-family: "URW Gothic L", "Helvetica", "Arial", sans-serif;
+	margin-left: 50px;
+	margin-right: 50px;
 }
 
+nav > ul {
+	background-color: lightgrey;
+	border-style: solid;
+	border-width: 1px;
+	border-color: darkblue;
+	font-size: 13px;
+	padding: 5px 5px 5px 5px;
+}
 
+li.href{
+	color: darkblue;
+}
 
+li > ul > li{
+	padding-left: 10px
+}
+
+li >a > img{
+	width: 13px;
+}
+
+ul{
+	list-style-type:none;
+}
+
+header{
+	margin-top: 50px;
+}
+header > a > img{
+    padding-top: 5px;
+    padding-left: 5px;
+	float: left;
+	width: 80px;
+}
+h1{
+	margin: 0;
+    padding-top: 15px;
+	height: 70px;
+    font-size: 40px;
+	background-color: darkblue;
+	color: white;
+}
+h2:before{
+    white-space: pre;
+}
+h2 {
+	counter-reset: h3counter;
+	line-height: 100px;
+    text-align: left;
+}
+h3{
+	border-bottom: 1px;
+	border-bottom: 1px solid black;
+	margin-bottom: 15px;
+}
+h3:before {
+	content: counter(h3counter) " ";
+	counter-increment: h3counter;
+}
+
+#scm-marchant-calc > img{
+    width: 200px;
+}
+
+#scm-marchant-calc{
+    font-size: 10px;
+    color: lightgrey;
+    float: left;
+    word-wrap: break-word;
+    width: 170px;
+    max-width: 220px;
+}
 /* images */
 
 
