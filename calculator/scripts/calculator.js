@@ -95,6 +95,6 @@ $(function(){
         $("#output").val(welcomeMsg);
         $("#input").empty();
 
-        reset();
+        init();
     });
 });
