@@ -140,6 +140,7 @@ $(function(){
         var number = $(this).val();
 
         if (resultAvailable) {
+            //previous result should be ignored in this case
             $("#input").empty();
             init();
             resultAvailable = false;
@@ -155,6 +156,7 @@ $(function(){
     $(".operator").on( "click", function () {
         clearWelcomeMsg();
         clearErrorMsg();
+        resultAvailable = false;
 
         var operator = $(this).val();
         var number = $("#input").val();
@@ -201,7 +203,7 @@ $(function(){
     $("#key-c").on( "click", function() {
         $("#output").val(welcomeMsg);
         $("#input").empty();
-
+        resultAvailable = false;
         init();
     });
 });
