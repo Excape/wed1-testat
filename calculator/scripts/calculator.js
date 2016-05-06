@@ -2,7 +2,7 @@
  * core
  */
 var result = undefined;
-var operation = {};
+var operation;
 
 var init = function () {
     operation = {
@@ -56,12 +56,16 @@ var getOperator = function () {
 
 /**
  * Calculates the result based on the input values.
- * @returns {number} result
+ * @returns {*} result
  */
 var calculate = function () {
-    result = eval(operation.var1 + operation.operator + operation.var2);
+    if (operation.var2 === undefined && checkValidPrefix(operation.operator)) {
+        result = math.eval(0 + operation.operator + operation.var1);
+    } else {
+        result = math.eval(operation.var1 + operation.operator + operation.var2);
+    }
     init();
-    operation.var1 = result;
+    operation.var1 = new Number(result);
 
     return result;
 }
@@ -85,6 +89,16 @@ var checkOperator = function (anOperator) {
     return $.inArray(anOperator, ["+", "-", "/", "*"]) !== -1;
 }
 
+/**
+ * Check if a parameter is a valid prefix.
+ * Valid operators are "+", "-"
+ * @param anOperator input operator
+ * @returns {boolean} true, valid prefix
+ */
+var checkValidPrefix = function (anOperator) {
+    return $.inArray(anOperator, ["+", "-"]) !== -1;
+}
+
 init();
 
 /**
@@ -92,13 +106,22 @@ init();
  */
 $(function(){
     var welcomeMsg = 'Welcome';
+    var resultAvailable = false;
 
     var clearWelcomeMsg = function () {
         $("#output:contains(" + welcomeMsg + ")").empty();
     }
+    
+    var clearErrorMsg = function () {
+        if ($("#output").hasClass("error")) {
+            $("#output").empty();
+            $("#output").removeClass("error");
+        }
+    }
 
     var handleError = function (anErrorMsg) {
         $("#output").val(anErrorMsg);
+        $("#output").addClass("error");
         init();
     }
 
@@ -107,11 +130,20 @@ $(function(){
 
         $("#output").empty();
         $("#input").val(result);
+        resultAvailable = true;
     }
 
     $(".number").on( "click", function() {
         clearWelcomeMsg();
+        clearErrorMsg();
+
         var number = $(this).val();
+
+        if (resultAvailable) {
+            $("#input").empty();
+            init();
+            resultAvailable = false;
+        }
 
         //ignore special case 0 at the beginning
         if (this.id !== "key-0" ||
@@ -121,11 +153,21 @@ $(function(){
     });
 
     $(".operator").on( "click", function () {
+        clearWelcomeMsg();
+        clearErrorMsg();
+
         var operator = $(this).val();
         var number = $("#input").val();
 
         try {
-            if (getOperator() !== undefined && operator !== getOperator()) {
+
+            if (getNumber() === undefined && !number.trim()) {
+                //check valid prefix
+                if (!checkValidPrefix(operator)) {
+                    throw "invalid prefix";
+                }
+                $("#output").val(operator);
+            } else if (getOperator() !== undefined && operator !== getOperator()) {
                 //switch operator
                 $("#output").val(getNumber() + ' ' + operator);
             } else {
@@ -133,7 +175,10 @@ $(function(){
                 $("#input").empty();
             }
 
-            setNumber(number);
+            if (number.trim()) {
+                setNumber(number);
+            }
+
             setOperator(operator);
         } catch (error) {
             console.log(error);
@@ -144,8 +189,13 @@ $(function(){
     $("#key-\\=").on( "click", function () {
         var number = $("#input").val();
 
-        setNumber(number);
-        handleCalculation();
+        try {
+            setNumber(number);
+            handleCalculation();
+        } catch (error) {
+            console.log(error);
+            handleError(error)
+        }
     });
 
     $("#key-c").on( "click", function() {
