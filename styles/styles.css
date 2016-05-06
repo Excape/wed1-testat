@@ -25,6 +25,28 @@ nav > ul {
 	padding: 5px 5px 5px 5px;
 }
 
+ul#language > li > a[hreflang]:before {
+    background-size: 1em 0.75em;
+    display: inline-block;
+    width: 1em;
+    height: 0.75em;
+    content:"";
+    margin-right: 0.25em;
+}
+
+ul#language > li > a[hreflang="it"]:before {
+    background-image: url(../media/flag-it.svg);
+}
+
+ul#language > li > a[hreflang="fr"]:before {
+    background-image: url(../media/flag-fr.svg);
+}
+
+ul#language > li > a[hreflang="en"]:before {
+    background-image: url(../media/flag-en.svg);
+}
+
+
 li.href{
 	color: darkblue;
 }
@@ -76,11 +98,11 @@ h3:before {
 	counter-increment: h3counter;
 }
 
-#scm-marchant-calc > img{
+figure.float-left > img {
     width: 200px;
 }
-
-#scm-marchant-calc{
+ 
+.float-left {
     font-size: 10px;
     color: lightgrey;
     float: left;
@@ -116,4 +138,3 @@ h3:before {
 	vertical-align: middle;
 	padding: 0; margin: 0;
 }
-
