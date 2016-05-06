@@ -169,7 +169,7 @@ $(function(){
                     throw "invalid prefix";
                 }
                 $("#output").val(operator);
-            } else if (getOperator() !== undefined && operator !== getOperator()) {
+            } else if (getOperator() !== undefined) {
                 //switch operator
                 $("#output").val(getNumber() + ' ' + operator);
             } else {
