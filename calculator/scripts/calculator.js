@@ -12,24 +12,53 @@ var init = function () {
     }
 }
 
+/**
+ * Set number.
+ * @param aNumber number
+ */
 var setNumber = function (aNumber) {
-    if (operation.var1 === undefined) {
-        operation.var1 = new Number(aNumber);
+    if (checkInt(aNumber)) {
+        if (operation.var1 === undefined) {
+            operation.var1 = new Number(aNumber);
+        } else {
+            operation.var2 = new Number(aNumber);
+        }
     } else {
-        operation.var2 = new Number(aNumber);
+        throw "invalid number";
     }
 }
 
-var setOperator = function (anOperator) {
-    operation.operator = anOperator;
+/**
+ * @returns {undefined|Number} var1
+ */
+var getNumber = function () {
+    return operation.var1;
 }
 
+/**
+ * Set operator
+ * @param anOperator operator
+ */
+var setOperator = function (anOperator) {
+    if (checkOperator(anOperator)) {
+        operation.operator = anOperator;
+    } else {
+        throw "invalid operator";
+    }
+}
+
+/**
+ * @returns {undefined|*} operator
+ */
 var getOperator = function () {
     return operation.operator;
 }
 
+/**
+ * Calculates the result based on the input values.
+ * @returns {number} result
+ */
 var calculate = function () {
-    validate();
     result = eval(operation.var1 + operation.operator + operation.var2);
     init();
     operation.var1 = result;
@@ -37,14 +66,26 @@ var calculate = function () {
     return result;
 }
 
-var validate = function () {
-    //TODO
-    return true;
+/**
+ * Check if a parameter is a valid integer.
+ * @param aNumber input number
+ * @returns {boolean} true, valid integer
+ */
+var checkInt = function (aNumber) {
+    return !isNaN(aNumber) && parseInt(Number(aNumber)) == aNumber && !isNaN(parseInt(aNumber, 10));
+}
+
+/**
+ * Check if a parameter is a valid operator.
+ * Valid operators are "+", "-", "/", "*"
+ * @param anOperator input operator
+ * @returns {boolean} true, valid operator
+ */
+var checkOperator = function (anOperator) {
+    return $.inArray(anOperator, ["+", "-", "/", "*"]) !== -1;
 }
 
 init();
-
-
 
 /**
  * UI
@@ -56,36 +97,52 @@ $(function(){
         $("#output:contains(" + welcomeMsg + ")").empty();
     }
 
+    var handleError = function (anErrorMsg) {
+        $("#output").val(anErrorMsg);
+        init();
+    }
+
     var handleCalculation = function () {
         var result = calculate();
-        $("#output").val(result);
+
+        $("#output").empty();
+        $("#input").val(result);
     }
 
     $(".number").on( "click", function() {
         clearWelcomeMsg();
         var number = $(this).val();
-        //handle special case 0
-        $("#input").append(number);
+
+        //ignore special case 0 at the beginning
+        if (this.id !== "key-0" ||
+            (this.id === "key-0" && $("#input").val().trim() || getOperator() !== undefined)) {
+            $("#input").append(number);
+        }
     });
 
     $(".operator").on( "click", function () {
         var operator = $(this).val();
         var number = $("#input").val();
 
-        setNumber(number);
-        if (getOperator() !== undefined) {
-            handleCalculation();
-            $("#output").append(' ' +  operator);
-        } else {
-            $("#output").append(number + ' ' +  operator);
+        try {
+            if (getOperator() !== undefined && operator !== getOperator()) {
+                //switch operator
+                $("#output").val(getNumber() + ' ' + operator);
+            } else {
+                $("#output").append(number + ' ' + operator);
+                $("#input").empty();
+            }
+
+            setNumber(number);
+            setOperator(operator);
+        } catch (error) {
+            console.log(error);
+            handleError(error)
         }
-        setOperator(operator);
-        $("#input").empty();
     });
 
     $("#key-\\=").on( "click", function () {
         var number = $("#input").val();
-        $("#input").empty();
 
         setNumber(number);
         handleCalculation();
