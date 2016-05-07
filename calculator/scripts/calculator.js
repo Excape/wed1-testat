@@ -101,7 +101,7 @@ var calculate = function () {
  * @returns {boolean} true, valid integer
  */
 var checkInt = function (aNumber) {
-    return !isNaN(aNumber) && parseInt(Number(aNumber)) == aNumber && !isNaN(parseInt(aNumber, 10)) && !isEmpty(aNumber);
+    return !isNaN(aNumber) && parseInt(Number(aNumber)) == aNumber && !isNaN(parseInt(aNumber, 10));
 }
 
 /**
@@ -167,6 +167,14 @@ $(function(){
         resultAvailable = true;
     }
 
+    var setupOutputString = function (anOperator, anOperand) {
+        if (anOperand !== undefined && !isEmpty(anOperand)) {
+           return anOperand + ' ' + anOperator;
+        } else {
+            return anOperator;
+        }
+    }
+
     $(".number").on( "click", function() {
         clearWelcomeMsg();
         clearErrorMsg();
@@ -181,7 +189,7 @@ $(function(){
         }
 
         //ignore 0 without any predecessor
-        if (this.id !== "key-0" ||  (this.id === "key-0" && $("#input").val().trim() || getOperator() !== undefined)) {
+        if (this.id !== "key-0" ||  (this.id === "key-0" && !isEmpty($("#input").val()) || getOperator() !== undefined)) {
             $("#input").append(number);
         }
     });
@@ -206,16 +214,14 @@ $(function(){
                     throw errorMsgInvalidPrefix;
                 }
                 $("#output").val(operator);
-            } else if (getOperator() !== undefined && getNumber() !== undefined) { //switch operator
-                $("#output").val(getNumber() + ' ' + operator);
+            } else if (getOperator() !== undefined) { //switch operator
+                $("#output").val(setupOutputString(operator, getNumber()))
             } else {
-                $("#output").append(number + ' ' + operator);
+                $("#output").val(setupOutputString(operator, number));
                 $("#input").empty();
-            }
-
-            if (!isEmpty(number)) {
                 setNumber(number);
             }
+
             setOperator(operator);
         } catch (error) {
             handleError(error)
