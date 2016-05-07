@@ -1,7 +1,6 @@
 /**
  * core
  */
-var result = undefined;
 var operation;
 
 var init = function () {
@@ -60,14 +59,33 @@ var getOperator = function () {
  */
 var calculate = function () {
     if (operation.var2 === undefined && checkValidPrefix(operation.operator)) {
-        result = math.eval(0 + operation.operator + operation.var1);
-    } else {
-        result = math.eval(operation.var1 + operation.operator + operation.var2);
+        operation.var2 = operation.var1;
+        operation.var2 = Number(0);
+    }
+    var tempResult;
+    if (!checkOperator(operation.operator)) {
+        throw "invalid operator";
+    }
+    if (!checkInt(operation.var1) || !checkInt(operation.var2)) {
+        throw "invalid number";
+    }
+    switch (operation.operator) {
+        case '+':
+            tempResult = operation.var1 + operation.var2;
+            break;
+        case '-':
+            tempResult = operation.var1 - operation.var2;
+            break;
+        case '*':
+            tempResult = operation.var1 * operation.var2;
+            break;
+        case '/':
+            tempResult = operation.var1 / operation.var2;
+            break;
     }
     init();
-    operation.var1 = new Number(result);
-
-    return result;
+    operation.var1 = new Number(tempResult);
+    return tempResult;
 }
 
 /**
@@ -169,7 +187,7 @@ $(function(){
                     throw "invalid prefix";
                 }
                 $("#output").val(operator);
-            } else if (getOperator() !== undefined) {
+            } else if (getOperator() !== undefined && getNumber() !== undefined) {
                 //switch operator
                 $("#output").val(getNumber() + ' ' + operator);
             } else {
