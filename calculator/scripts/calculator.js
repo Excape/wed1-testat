@@ -90,7 +90,7 @@ var calculate = function () {
             tempResult = operation.var1 / operation.var2;
             break;
     }
-    init();
+    init(); //prepare data for next calculation
     operation.var1 = new Number(tempResult);
     return tempResult;
 }
@@ -173,7 +173,7 @@ $(function(){
 
     var setupOutputString = function (anOperator, anOperand) {
         if (anOperand !== undefined && !isEmpty(anOperand)) {
-           return anOperand + ' ' + anOperator;
+            return anOperand + ' ' + anOperator;
         } else {
             return anOperator;
         }
