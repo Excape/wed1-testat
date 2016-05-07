@@ -156,6 +156,7 @@ $(function(){
     var handleError = function (anErrorMsg) {
         $("#output").val(anErrorMsg);
         $("#output").addClass("error");
+        $("#input").empty();
         init();
     }
 
