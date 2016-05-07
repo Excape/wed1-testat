@@ -3,6 +3,10 @@
  */
 var operation;
 
+var errorMsgInvalidOperand = "invalid operand";
+var errorMsgInvalidOperator = "invalid operator";
+var errorMsgInvalidPrefix = "invalid prefix";
+
 var init = function () {
     operation = {
         var1: undefined,
@@ -23,7 +27,7 @@ var setNumber = function (aNumber) {
             operation.var2 = new Number(aNumber);
         }
     } else {
-        throw "invalid number";
+        throw errorMsgInvalidOperand;
     }
 }
 
@@ -35,14 +39,14 @@ var getNumber = function () {
 }
 
 /**
- * Set operator
+ * Set operator.
  * @param anOperator operator
  */
 var setOperator = function (anOperator) {
     if (checkOperator(anOperator)) {
         operation.operator = anOperator;
     } else {
-        throw "invalid operator";
+        throw errorMsgInvalidOperator;
     }
 }
 
@@ -54,20 +58,23 @@ var getOperator = function () {
 }
 
 /**
- * Calculates the result based on the input values.
+ * Calculates the result based on the input values stored in the operation object.
  * @returns {*} result
  */
 var calculate = function () {
-    if (operation.var2 === undefined && checkValidPrefix(operation.operator)) {
-        operation.var2 = operation.var1;
-        operation.var2 = Number(0);
-    }
     var tempResult;
+
+    if (operation.var2 === undefined && checkValidPrefix(operation.operator)) {
+        //prepare calculation with just one operand ex. -1 or +1
+        operation.var2 = operation.var1;
+        operation.var1 = Number(0);
+    }
+
     if (!checkOperator(operation.operator)) {
-        throw "invalid operator";
+        throw errorMsgInvalidOperator;
     }
     if (!checkInt(operation.var1) || !checkInt(operation.var2)) {
-        throw "invalid number";
+        throw errorMsgInvalidOperand;
     }
     switch (operation.operator) {
         case '+':
@@ -94,7 +101,7 @@ var calculate = function () {
  * @returns {boolean} true, valid integer
  */
 var checkInt = function (aNumber) {
-    return !isNaN(aNumber) && parseInt(Number(aNumber)) == aNumber && !isNaN(parseInt(aNumber, 10));
+    return !isNaN(aNumber) && parseInt(Number(aNumber)) == aNumber && !isNaN(parseInt(aNumber, 10)) && !isEmpty(aNumber);
 }
 
 /**
@@ -115,6 +122,15 @@ var checkOperator = function (anOperator) {
  */
 var checkValidPrefix = function (anOperator) {
     return $.inArray(anOperator, ["+", "-"]) !== -1;
+}
+
+/**
+ * Check if a parameter is empty.
+ * @param anInput input
+ * @returns {boolean} true, input is empty
+ */
+var isEmpty = function (anInput) {
+    return !anInput.trim();
 }
 
 init();
@@ -158,15 +174,14 @@ $(function(){
         var number = $(this).val();
 
         if (resultAvailable) {
-            //previous result should be ignored in this case
+            //previous result should be ignored in this case and the calculator will be reset
             $("#input").empty();
-            init();
             resultAvailable = false;
+            init();
         }
 
-        //ignore special case 0 at the beginning
-        if (this.id !== "key-0" ||
-            (this.id === "key-0" && $("#input").val().trim() || getOperator() !== undefined)) {
+        //ignore 0 without any predecessor
+        if (this.id !== "key-0" ||  (this.id === "key-0" && $("#input").val().trim() || getOperator() !== undefined)) {
             $("#input").append(number);
         }
     });
@@ -174,34 +189,35 @@ $(function(){
     $(".operator").on( "click", function () {
         clearWelcomeMsg();
         clearErrorMsg();
-        resultAvailable = false;
+
+        if (resultAvailable) {
+            //previous result should not be ignored and will be used as first operand
+            //because after the result was shown a operator was selected
+            resultAvailable = false;
+        }
 
         var operator = $(this).val();
         var number = $("#input").val();
 
         try {
-
-            if (getNumber() === undefined && !number.trim()) {
+            if (getNumber() === undefined && isEmpty(number)) { //operator was selected without any numeric input
                 //check valid prefix
                 if (!checkValidPrefix(operator)) {
-                    throw "invalid prefix";
+                    throw errorMsgInvalidPrefix;
                 }
                 $("#output").val(operator);
-            } else if (getOperator() !== undefined && getNumber() !== undefined) {
-                //switch operator
+            } else if (getOperator() !== undefined && getNumber() !== undefined) { //switch operator
                 $("#output").val(getNumber() + ' ' + operator);
             } else {
                 $("#output").append(number + ' ' + operator);
                 $("#input").empty();
             }
 
-            if (number.trim()) {
+            if (!isEmpty(number)) {
                 setNumber(number);
             }
-
             setOperator(operator);
         } catch (error) {
-            console.log(error);
             handleError(error)
         }
     });
@@ -213,7 +229,6 @@ $(function(){
             setNumber(number);
             handleCalculation();
         } catch (error) {
-            console.log(error);
             handleError(error)
         }
     });
@@ -221,6 +236,7 @@ $(function(){
     $("#key-c").on( "click", function() {
         $("#output").val(welcomeMsg);
         $("#input").empty();
+
         resultAvailable = false;
         init();
     });
