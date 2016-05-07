@@ -130,7 +130,10 @@ var checkValidPrefix = function (anOperator) {
  * @returns {boolean} true, input is empty
  */
 var isEmpty = function (anInput) {
-    return !anInput.trim();
+    if (typeof anInput.trim === "function") {
+        return !anInput.trim();
+    }
+    return false;
 }
 
 init();
