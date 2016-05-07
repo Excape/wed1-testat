@@ -219,6 +219,12 @@ $(function(){
                 }
                 $("#output").val(operator);
             } else if (getOperator() !== undefined) { //switch operator
+                if (operation.var1 === undefined) {
+                    //check valid prefix if first operand is not set
+                    if (!checkValidPrefix(operator)) {
+                        throw errorMsgInvalidPrefix;
+                    }
+                }
                 $("#output").val(setupOutputString(operator, getNumber()))
             } else {
                 $("#output").val(setupOutputString(operator, number));
