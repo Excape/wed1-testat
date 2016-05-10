@@ -16,17 +16,22 @@ body {
 	margin-right: 50px;
 }
 
+main {
+	margin-left: 5px;
+}
+
 nav > ul {
+    list-style-type:none;
 	background-color: lightgrey;
 	border-style: solid;
 	border-width: 1px;
 	border-color: #0563a2;
-	font-size: 13px;
+	font-size: 1em;
 	padding: 5px 5px 5px 5px;
 }
 
-main{
-	margin-left: 5px;
+nav > ul ul {
+    list-style-type:none;
 }
 
 ul#language > li > a[hreflang]:before {
@@ -50,32 +55,33 @@ ul#language > li > a[hreflang="en"]:before {
     background-image: url(../media/flag-en.svg);
 }
 
-li.href{
-	color: #0060a0;
+a {
+	color: black;
+    text-decoration: underline;
 }
 
-li > ul > li{
-	padding-left: 10px
+nav a {
+    color: #0060a0;
 }
 
-li >a > img{
-	width: 13px;
+
+nav li > ul > li {
+	padding-left: 1em;
 }
 
-ul{
-	list-style-type:none;
-}
 
-header{
+header {
 	margin-top: 20px;
 }
-header > a > img{
+
+header > a > img {
     padding-top: 5px;
     padding-left: 5px;
 	float: left;
 	width: 80px;
 }
-h1{
+
+h1 {
 	padding-left: 90px;
 	margin: 0;
     padding-top: 15px;
@@ -85,106 +91,111 @@ h1{
 	color: white;
 }
 
-h2:before{
+h2:before {
     white-space: pre;
 }
+
 h2 {
 	counter-reset: h3counter;
 	padding-top: 20px;
 }
 
-nav > h2{
+nav > h2 {
 	padding-top: 20px;
 	padding-left: 5px;
 	padding-bottom: 8px;
 	clear: left;
 }
 
-#font-size-form{
-}
-h3{
+h3 {
 	border-bottom: 1px;
 	border-bottom: 1px solid black;
 	margin-bottom: 15px;
 }
+
 h3:before {
 	content: counter(h3counter) " ";
 	counter-increment: h3counter;
 }
 
+figure > figcaption {
+    font-size: 0.75em;
+    color: grey;
+}
+
+figure.float-left {
+    float: left;
+    width: 25%;
+    max-width: 300px;
+    margin: 10px 10px 15px 10px;
+}
+
 figure.float-left > img {
-    width: 200px;
+    width: 100%;
 }
  
-.float-left {
-    font-size: 10px;
-    color: lightgrey;
-    float: left;
+figure.float-left > figcaption {
     word-wrap: break-word;
-    width: 220px;
-	padding-bottom: 20px;
+    width: 100%
+}
+
+figure.video > video {
+    width: 100%;
+    max-width: 800px;
 }
 
 h4 {
-	padding-bottom: 10px;
-	font-size: 14px;
+	padding-bottom: 0.5em;
+	font-size: 1em;
+    font-weight: bold;
 }
 
 footer {
 	border-style: dashed;
-	margin-top: 15px;
+	margin-top: 1em;
 	text-align: left;
 	border-width: 1px;
-	font-size: 14px;
-	font-style:italic;
+	font-size: 1em;
+	font-style: italic;
+    padding: 3px 3px 3px 3px;
 }
 
 span.footer-date {
-	/* clear: left; */
 	float: right;
 }
 
-/* images */
 small {
-	color: lightgrey;
-	font-size: 10px;
+    display: block;
+    margin-top: 1em;
+	font-size: 0.75em;
 }
 
-section > ul > li {
+main ul {
+    list-style: none;
+}
+
+main ul > li {
 	color: #0060a0;
-	font-size: 14px;
+    font-weight: bold;
 }
 
-
-section > ul > li > ul > li{
+main ul > li li {
+    padding-left: 1em;
 	color: black;
-	list-style: inside;
+    font-weight: normal;
+	list-style: inside square; /*TODO: Replace with custom icon */
 
-}
-figcaption {
-	color: lightgrey;
-	font-size: 12px;
-}
-
-#Ti-Description{
-	font-size: 12px;
-	padding-top: 15px;
 }
 
 ol > li {
-	font-size: 14px;
 	list-style-position: inside;
 }
 
 /* text */
-p{
-	font-size: 14px;
+p {
+	font-size: 1em;
+    margin: .5em 0 .5em 0;
 }
-
-
-
-/* lists */
-
 
 
 /* table */
@@ -265,4 +276,3 @@ footer.Footer-Bottom > p >a {
 p.Footer-Bottom{
 	font-size: 12px;
 }
-
