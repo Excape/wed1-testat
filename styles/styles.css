@@ -14,6 +14,7 @@ body {
 	font-family: "URW Gothic L", "Helvetica", "Arial", sans-serif;
 	margin-left: 50px;
 	margin-right: 50px;
+    max-width: 1024px;
 }
 
 main {
@@ -34,7 +35,7 @@ nav > ul ul {
     list-style-type:none;
 }
 
-ul#language > li > a[hreflang]:before {
+ul#language > li > a[hreflang]::before {
     background-size: 1em 0.75em;
     display: inline-block;
     width: 1em;
@@ -43,15 +44,15 @@ ul#language > li > a[hreflang]:before {
     margin-right: 0.25em;
 }
 
-ul#language > li > a[hreflang="it"]:before {
+ul#language > li > a[hreflang="it"]::before {
     background-image: url(../media/flag-it.svg);
 }
 
-ul#language > li > a[hreflang="fr"]:before {
+ul#language > li > a[hreflang="fr"]::before {
     background-image: url(../media/flag-fr.svg);
 }
 
-ul#language > li > a[hreflang="en"]:before {
+ul#language > li > a[hreflang="en"]::before {
     background-image: url(../media/flag-en.svg);
 }
 
@@ -158,6 +159,23 @@ footer {
 	font-size: 1em;
 	font-style: italic;
     padding: 3px 3px 3px 3px;
+}
+
+/* Calculator */
+
+div#calculator {
+    position: relative;
+    width: 60%;
+    height: 0;
+    padding-bottom: calc(60% * 1.05);
+}
+
+div#calculator > iframe {
+    position: absolute;
+    top: 0;
+    left: 0;
+    height: 100%;
+    width: 100%
 }
 
 span.footer-date {
