@@ -247,6 +247,7 @@ div.yt-video {
     padding-bottom: calc(100% *(9/16));
 }
 
+
 div.yt-video > iframe {
     position: absolute;
     top: 0;
@@ -271,8 +272,9 @@ figure#svg-zeitgewinn object {
 }
 /* forms */
 
-input :not(input[type="radio"]) {
+input:not([type="radio"]), select, textarea {
     display: block;
+    margin-left: 10px;
 }
 
 input[type="submit"], input[type="reset"] {
