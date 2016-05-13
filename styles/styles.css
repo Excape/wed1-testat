@@ -284,6 +284,10 @@ input[type="submit"], input[type="reset"] {
 	font-size: 1em;
 }
 
+.input-error {
+	/* add error styling for input fields here /*
+}
+
 /* footer */
 body > footer {
 	border: none;
