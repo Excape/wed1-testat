@@ -217,22 +217,30 @@ p {
 /* table */
 table {
 	width: 100%;
+	border-collapse: collapse;
 }
 
 thead {
 	background-color: #0060a0;
 	color: white;
-	border: 1px solid black;
+	border-bottom: 3px solid black;
+	border-top: 3px solid black;
 	text-align: center;
 }
 
 tr:nth-child(even) {
 	background-color: #dbe6ef;
+	border-bottom: 1px solid #bdd0e4;
+	border-top: 1px solid #bdd0e4;
 }
 
 tr {
 	text-align: center;
-	height: 35px;
+	height: 2.5em;
+}
+
+td {
+	padding-left: 0.5em;
 }
 
 td:first-child {
@@ -256,8 +264,9 @@ div.yt-video > iframe {
     width: 100%;
 }
 
-figure#svg-zeitgewinn object {
-	width: 200px;
+figure#svg-zeitgewinn > object {
+	width: 100%
+
 }
 
 #font-size-form {
@@ -276,6 +285,7 @@ input:not([type="radio"]), select, textarea {
     display: block;
     margin-left: 10px;
 }
+
 
 input[type="submit"], input[type="reset"] {
 	background-color: #0060a0;
