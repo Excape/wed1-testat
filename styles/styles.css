@@ -97,6 +97,8 @@ h2:before {
 }
 
 h2 {
+	font-size: 1.8em;
+	font-weight: bold;
 	counter-reset: h3counter;
 	padding-top: 20px;
 }
@@ -109,6 +111,8 @@ nav > h2 {
 }
 
 h3 {
+	font-size: 1.5em;
+	font-weight: bold;
 	border-bottom: 1px;
 	border-bottom: 1px solid black;
 	margin-bottom: 15px;
@@ -146,7 +150,6 @@ figure.video > video {
 }
 
 h4 {
-	padding-bottom: 0.5em;
 	font-size: 1em;
     font-weight: bold;
 }
