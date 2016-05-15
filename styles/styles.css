@@ -359,8 +359,9 @@ button:before {
 	content:"";
 	margin-right: 0.5em;
 }
+
 .input-error {
-	/* add error styling for input fields here */
+	border: 2px solid #ff9494 !important;
 }
 
 /* footer */
