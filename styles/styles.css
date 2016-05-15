@@ -285,7 +285,7 @@ figure#svg-zeitgewinn > object {
 /* forms */
 
 input:not([type="radio"]):not([type="submit"]):not([type="reset"]):not([type="checkbox"]):not([type="file"]),
-select, textarea {
+ textarea {
     display: block;
 	background-color: #f4f4f4;
 	border: none;
@@ -306,6 +306,13 @@ label {
 	display: block;
 	margin-bottom: 10px;
 	color: grey;
+}
+
+select {
+	background: #f4f4f4 linear-gradient(to bottom, transparent, rgba(0, 0, 0, 0.06)) repeat scroll 0 0;
+	height: 28px;
+	width: 100%;
+	border-radius: 5px;
 }
 
 fieldset {
@@ -364,6 +371,10 @@ button:before {
 	border: 2px solid #ff9494 !important;
 }
 
+p.p_rechtliches{
+	color: #808080;
+	font-size: 0.8em;
+}
 /* footer */
 body > footer {
 	border: none;
