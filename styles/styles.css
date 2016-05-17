@@ -380,6 +380,8 @@ body > footer {
 	border: none;
 	background-color: #0060a0;
 	color: white;
+    margin-top: 2em;
+    padding: 0.25em 0.5em 0.5em 0.5em;
 }
 
 body > footer a {
