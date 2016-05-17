@@ -73,7 +73,7 @@ var calculate = function () {
     if (!checkOperator(operation.operator)) {
         throw errorMsgInvalidOperator;
     }
-    if (!checkInt(operation.var1) || !checkInt(operation.var2)) {
+    if (!checkInt(operation.var1) || !checkInt(operation.var2) || (operation.operator === '/' && operation.var2 == Number(0)) ) {
         throw errorMsgInvalidOperand;
     }
     switch (operation.operator) {
