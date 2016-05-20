@@ -260,11 +260,17 @@ figure#svg-zeitgewinn > object {
 	float: right;
 }
 
-#font-size-form label, #font-size-form input, #font-size-form output {
+#font-size-form > label, #font-size-form > input, #font-size-form > output{
 	display: inline-block;
 	vertical-align: middle;
 	padding: 0;
-    margin: 0;
+    margin-top: 1em;
+}
+
+#font-size-form > input {
+	width: 150px;
+	margin-left: 1em;
+	margin-right: 1em;
 }
 
 /* forms */
@@ -287,7 +293,7 @@ textarea:focus {
 	color: #0060a0;
 }
 
-label {
+form#new-author label {
 	display: block;
 	margin-bottom: 10px;
 	color: grey;
