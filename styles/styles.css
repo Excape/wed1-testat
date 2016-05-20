@@ -274,7 +274,7 @@ figure#svg-zeitgewinn > object {
 }
 
 /* forms */
-input:not([type="radio"]):not([type="submit"]):not([type="reset"]):not([type="checkbox"]):not([type="file"]),
+input:not([type="radio"]):not([type="checkbox"]):not([type="file"]),
  textarea {
     display: block;
 	background-color: #f4f4f4;
@@ -286,7 +286,7 @@ input:not([type="radio"]):not([type="submit"]):not([type="reset"]):not([type="ch
 	font-size: 1em;
 }
 
-input:not([type="radio"]):not([type="submit"]):not([type="reset"]):not([type="checkbox"]):not([type="file"]):focus,
+input:not([type="radio"]):not([type="checkbox"]):not([type="file"]):focus,
 textarea:focus {
 	outline: none;
 	border-bottom: 1px solid #0060a0;
@@ -322,7 +322,7 @@ input[type="file"] {
 	display: block;
 }
 
-input[type="reset"], button {
+button {
 	background-color: #0060a0;
 	color: white;
 	border: none;
@@ -336,11 +336,11 @@ input[type="reset"], button {
 	font-weight: bolder;
 }
 
-input[type="reset"]:hover, button:hover {
+button:hover {
 	color: lightgrey;
 }
 
-input[type="reset"]:active, button:active {
+button:active {
 	color: lightgrey;
 	outline: none;
 	-webkit-box-shadow: inset 0 0 10px black;
