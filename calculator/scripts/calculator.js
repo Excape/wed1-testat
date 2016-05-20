@@ -1,3 +1,5 @@
+"use strict";
+
 /**
  * core
  */
@@ -148,7 +150,7 @@ $(function () {
     var clearWelcomeMsg = function () {
         $("#output:contains(" + welcomeMsg + ")").empty();
     };
-    
+
     var clearErrorMsg = function () {
         if ($("#output").hasClass("error")) {
             $("#output").empty();
@@ -193,7 +195,7 @@ $(function () {
         }
 
         //ignore 0 without any predecessor
-        if (this.id !== "key-0" || (this.id === "key-0" && !isEmpty($("#input").val()) || getOperator() !== undefined)) {
+        if (this.id !== "key-0" || (this.id === "key-0" && (!isEmpty($("#input").val()) || getOperator() !== undefined))) {
             $("#input").append(number);
         }
     });
@@ -225,7 +227,7 @@ $(function () {
                         throw errorMsgInvalidPrefix;
                     }
                 }
-                $("#output").val(setupOutputString(operator, getNumber()))
+                $("#output").val(setupOutputString(operator, getNumber()));
             } else {
                 $("#output").val(setupOutputString(operator, number));
                 $("#input").empty();
@@ -234,7 +236,7 @@ $(function () {
 
             setOperator(operator);
         } catch (error) {
-            handleError(error)
+            handleError(error);
         }
     });
 
@@ -245,11 +247,11 @@ $(function () {
             setNumber(number);
             handleCalculation();
         } catch (error) {
-            handleError(error)
+            handleError(error);
         }
     });
 
-    $("#key-c").on("click", function() {
+    $("#key-c").on("click", function () {
         $("#output").val(welcomeMsg);
         $("#input").empty();
 
