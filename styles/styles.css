@@ -167,10 +167,10 @@ main footer {
 /* Calculator */
 
 iframe#calculator {
-	width: 50vw;
-	max-width: 512px;
-	height: calc(50vw * 1.05);
-	max-height: calc(1024px * 0.5 * 1.05);
+    width: 50vw;
+    max-width: 512px;
+    height: calc(50vw * 1.05);
+    max-height: calc(512px * 1.05 + 15px);
 }
 
 span.footer-date {
@@ -244,10 +244,10 @@ td:first-child {
 }
 
 iframe#yt-video {
-	width: calc(100vw - 120px);
-	max-width: 100%;
-	height: calc((100vw - 120px) * (9/16));
-	max-height: calc(1024px * (9/16));
+    width: calc(100vw - 120px);
+    max-width: 100%;
+    height: calc((100vw - 120px) * (9/16));
+    max-height: calc(1024px * (9/16));
 }
 
 figure#svg-zeitgewinn > object {
