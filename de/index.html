@@ -131,7 +131,7 @@
             </section>
             <section>
                 <header><h3>Demonstration</h3></header>
-                <div id="calculator"><iframe src="../calculator/index.html" name="Calculator demo"></iframe></div>
+                <iframe id="calculator" src="../calculator/index.html" name="Calculator demo"></iframe>
                 <p><small>Casino Mini von 1972</small></p>
             </section>
             <section>
@@ -256,9 +256,9 @@
             </section>
             <section>
                 <header><h3>iPhone calculator tricks</h3></header>
-                <div class="yt-video">
-                    <iframe src="https://www.youtube.com/embed/a7rcVgb41-0" allowfullscreen></iframe>
-                </div>
+               <!-- <div class="yt-video"> -->
+                    <iframe id="yt-video" src="https://www.youtube.com/embed/a7rcVgb41-0" allowfullscreen></iframe>
+                <!-- </div> -->
                 <small>iPhone Calculator Tricks  on YouTube: <a href="https://www.youtube.com/watch?v=a7rcVgb41-0">youtube.com/watch?v=a7rcVgb41-0</a></small>
                 <footer>
                     <span>Zuletzt geändert von Paul Sarner</span>
@@ -340,17 +340,17 @@
                             <input type="file" name="profileimgs" accept="image/*" multiple />
                         </label>
 				    </fieldset>
-                    <fieldset>
+                    <fieldset id="legal">
                         <legend>Rechtliches</legend>
-                        <p class="legal">
+                        <p>
                             <input type="checkbox" name="legal" value="originator-text" />
                             Ich bestätige, das ich keine Texte veröffentlichen werde, deren Urheber ich nicht bin
                         </p>
-                        <p class="legal">
+                        <p>
                             <input type="checkbox" name="legal" value="originator-media" />
                             Ich bestätige, das ich keine Medien veröffentlichen werden, deren Urheber ich nicht bin
                         </p>
-                        <p class="legal">
+                        <p>
                             <input type="checkbox" name="legal" value="integrity" />
                             Ich bestätige, das nur Texte veröffentlichen werde, die nach bestem Treu und glauben der Wahrheit entsprechen und eingereichte Medien Bilder nicht manipuliert wurden
                         </p>
