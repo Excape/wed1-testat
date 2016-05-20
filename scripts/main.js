@@ -1,4 +1,6 @@
-$(function(){
+"use strict";
+
+$(function () {
 
     $('form#new-author input').focusout(function () {
         if (!this.checkValidity()) {

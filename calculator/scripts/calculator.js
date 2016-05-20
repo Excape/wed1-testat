@@ -18,6 +18,47 @@ var init = function () {
 };
 
 /**
+ * Check if a parameter is a valid integer.
+ * @param aNumber input number
+ * @returns {boolean} true, valid integer
+ */
+var checkInt = function (aNumber) {
+    return !isNaN(aNumber) && parseInt(Number(aNumber)) == aNumber && !isNaN(parseInt(aNumber, 10));
+};
+
+/**
+ * Check if a parameter is a valid operator.
+ * Valid operators are "+", "-", "/", "*"
+ * @param anOperator input operator
+ * @returns {boolean} true, valid operator
+ */
+var checkOperator = function (anOperator) {
+    return $.inArray(anOperator, ["+", "-", "/", "*"]) !== -1;
+};
+
+/**
+ * Check if a parameter is a valid prefix.
+ * Valid operators are "+", "-"
+ * @param anOperator input operator
+ * @returns {boolean} true, valid prefix
+ */
+var checkValidPrefix = function (anOperator) {
+    return $.inArray(anOperator, ["+", "-"]) !== -1;
+};
+
+/**
+ * Check if a parameter is empty.
+ * @param anInput input
+ * @returns {boolean} true, input is empty
+ */
+var isEmpty = function (anInput) {
+    if (typeof anInput.trim === "function") {
+        return !anInput.trim();
+    }
+    return false;
+};
+
+/**
  * Set number.
  * @param aNumber number
  */
@@ -57,47 +98,6 @@ var setOperator = function (anOperator) {
  */
 var getOperator = function () {
     return operation.operator;
-};
-
-/**
- * Check if a parameter is a valid integer.
- * @param aNumber input number
- * @returns {boolean} true, valid integer
- */
-var checkInt = function (aNumber) {
-    return !isNaN(aNumber) && parseInt(Number(aNumber)) == aNumber && !isNaN(parseInt(aNumber, 10));
-};
-
-/**
- * Check if a parameter is a valid operator.
- * Valid operators are "+", "-", "/", "*"
- * @param anOperator input operator
- * @returns {boolean} true, valid operator
- */
-var checkOperator = function (anOperator) {
-    return $.inArray(anOperator, ["+", "-", "/", "*"]) !== -1;
-};
-
-/**
- * Check if a parameter is a valid prefix.
- * Valid operators are "+", "-"
- * @param anOperator input operator
- * @returns {boolean} true, valid prefix
- */
-var checkValidPrefix = function (anOperator) {
-    return $.inArray(anOperator, ["+", "-"]) !== -1;
-};
-
-/**
- * Check if a parameter is empty.
- * @param anInput input
- * @returns {boolean} true, input is empty
- */
-var isEmpty = function (anInput) {
-    if (typeof anInput.trim === "function") {
-        return !anInput.trim();
-    }
-    return false;
 };
 
 /**
