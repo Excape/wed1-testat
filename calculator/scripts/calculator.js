@@ -18,12 +18,12 @@ var init = function () {
 };
 
 /**
- * Check if a parameter is a valid integer.
+ * Check if a parameter is a valid number.
  * @param aNumber input number
- * @returns {boolean} true, valid integer
+ * @returns {boolean} true, valid number
  */
-var checkInt = function (aNumber) {
-    return !isNaN(aNumber) && parseInt(Number(aNumber)) == aNumber && !isNaN(parseInt(aNumber, 10));
+var isNumeric = function (aNumber) {
+    return !isNaN(parseFloat(aNumber)) && isFinite(aNumber);
 };
 
 /**
@@ -63,7 +63,7 @@ var isEmpty = function (anInput) {
  * @param aNumber number
  */
 var setNumber = function (aNumber) {
-    if (checkInt(aNumber)) {
+    if (isNumeric(aNumber)) {
         if (operation.var1 === undefined) {
             operation.var1 = Number(aNumber);
         } else {
@@ -116,7 +116,7 @@ var calculate = function () {
     if (!checkOperator(operation.operator)) {
         throw errorMsgInvalidOperator;
     }
-    if (!checkInt(operation.var1) || !checkInt(operation.var2) || (operation.operator === '/' && operation.var2 === Number(0))) {
+    if (!isNumeric(operation.var1) || !isNumeric(operation.var2) || (operation.operator === '/' && operation.var2 === Number(0))) {
         throw errorMsgInvalidOperand;
     }
     switch (operation.operator) {
