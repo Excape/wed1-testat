@@ -12,8 +12,8 @@ var init = function () {
         var1: undefined,
         var2: undefined,
         operator: undefined
-    }
-}
+    };
+};
 
 /**
  * Set number.
@@ -29,14 +29,14 @@ var setNumber = function (aNumber) {
     } else {
         throw errorMsgInvalidOperand;
     }
-}
+};
 
 /**
  * @returns {undefined|Number} var1
  */
 var getNumber = function () {
     return operation.var1;
-}
+};
 
 /**
  * Set operator.
@@ -48,14 +48,14 @@ var setOperator = function (anOperator) {
     } else {
         throw errorMsgInvalidOperator;
     }
-}
+};
 
 /**
  * @returns {undefined|*} operator
  */
 var getOperator = function () {
     return operation.operator;
-}
+};
 
 /**
  * Check if a parameter is a valid integer.
@@ -64,7 +64,7 @@ var getOperator = function () {
  */
 var checkInt = function (aNumber) {
     return !isNaN(aNumber) && parseInt(Number(aNumber)) == aNumber && !isNaN(parseInt(aNumber, 10));
-}
+};
 
 /**
  * Check if a parameter is a valid operator.
@@ -74,7 +74,7 @@ var checkInt = function (aNumber) {
  */
 var checkOperator = function (anOperator) {
     return $.inArray(anOperator, ["+", "-", "/", "*"]) !== -1;
-}
+};
 
 /**
  * Check if a parameter is a valid prefix.
@@ -84,7 +84,7 @@ var checkOperator = function (anOperator) {
  */
 var checkValidPrefix = function (anOperator) {
     return $.inArray(anOperator, ["+", "-"]) !== -1;
-}
+};
 
 /**
  * Check if a parameter is empty.
@@ -96,7 +96,7 @@ var isEmpty = function (anInput) {
         return !anInput.trim();
     }
     return false;
-}
+};
 
 /**
  * Calculates the result based on the input values stored in the operation object.
@@ -114,7 +114,7 @@ var calculate = function () {
     if (!checkOperator(operation.operator)) {
         throw errorMsgInvalidOperator;
     }
-    if (!checkInt(operation.var1) || !checkInt(operation.var2) || (operation.operator === '/' && operation.var2 == Number(0))) {
+    if (!checkInt(operation.var1) || !checkInt(operation.var2) || (operation.operator === '/' && operation.var2 === Number(0))) {
         throw errorMsgInvalidOperand;
     }
     switch (operation.operator) {
@@ -134,34 +134,34 @@ var calculate = function () {
     init(); //prepare data for next calculation
     operation.var1 = Number(tempResult);
     return tempResult;
-}
+};
 
 init();
 
 /**
  * UI
  */
-$(function() {
+$(function () {
     var welcomeMsg = 'Welcome';
     var resultAvailable = false;
 
     var clearWelcomeMsg = function () {
         $("#output:contains(" + welcomeMsg + ")").empty();
-    }
+    };
     
     var clearErrorMsg = function () {
         if ($("#output").hasClass("error")) {
             $("#output").empty();
             $("#output").removeClass("error");
         }
-    }
+    };
 
     var handleError = function (anErrorMsg) {
         $("#output").val(anErrorMsg);
         $("#output").addClass("error");
         $("#input").empty();
         init();
-    }
+    };
 
     var handleCalculation = function () {
         var result = calculate();
@@ -169,7 +169,7 @@ $(function() {
         $("#output").empty();
         $("#input").val(result);
         resultAvailable = true;
-    }
+    };
 
     var setupOutputString = function (anOperator, anOperand) {
         if (anOperand !== undefined && !isEmpty(anOperand)) {
@@ -177,7 +177,7 @@ $(function() {
         } else {
             return anOperator;
         }
-    }
+    };
 
     $(".number").on("click", function () {
         clearWelcomeMsg();
