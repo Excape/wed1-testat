@@ -22,9 +22,9 @@ var init = function () {
 var setNumber = function (aNumber) {
     if (checkInt(aNumber)) {
         if (operation.var1 === undefined) {
-            operation.var1 = new Number(aNumber);
+            operation.var1 = Number(aNumber);
         } else {
-            operation.var2 = new Number(aNumber);
+            operation.var2 = Number(aNumber);
         }
     } else {
         throw errorMsgInvalidOperand;
@@ -55,44 +55,6 @@ var setOperator = function (anOperator) {
  */
 var getOperator = function () {
     return operation.operator;
-}
-
-/**
- * Calculates the result based on the input values stored in the operation object.
- * @returns {*} result
- */
-var calculate = function () {
-    var tempResult;
-
-    if (operation.var2 === undefined && checkValidPrefix(operation.operator)) {
-        //prepare calculation with just one operand ex. -1 or +1
-        operation.var2 = operation.var1;
-        operation.var1 = Number(0);
-    }
-
-    if (!checkOperator(operation.operator)) {
-        throw errorMsgInvalidOperator;
-    }
-    if (!checkInt(operation.var1) || !checkInt(operation.var2) || (operation.operator === '/' && operation.var2 == Number(0)) ) {
-        throw errorMsgInvalidOperand;
-    }
-    switch (operation.operator) {
-        case '+':
-            tempResult = operation.var1 + operation.var2;
-            break;
-        case '-':
-            tempResult = operation.var1 - operation.var2;
-            break;
-        case '*':
-            tempResult = operation.var1 * operation.var2;
-            break;
-        case '/':
-            tempResult = operation.var1 / operation.var2;
-            break;
-    }
-    init(); //prepare data for next calculation
-    operation.var1 = new Number(tempResult);
-    return tempResult;
 }
 
 /**
@@ -136,12 +98,50 @@ var isEmpty = function (anInput) {
     return false;
 }
 
+/**
+ * Calculates the result based on the input values stored in the operation object.
+ * @returns {*} result
+ */
+var calculate = function () {
+    var tempResult;
+
+    if (operation.var2 === undefined && checkValidPrefix(operation.operator)) {
+        //prepare calculation with just one operand ex. -1 or +1
+        operation.var2 = operation.var1;
+        operation.var1 = Number(0);
+    }
+
+    if (!checkOperator(operation.operator)) {
+        throw errorMsgInvalidOperator;
+    }
+    if (!checkInt(operation.var1) || !checkInt(operation.var2) || (operation.operator === '/' && operation.var2 == Number(0))) {
+        throw errorMsgInvalidOperand;
+    }
+    switch (operation.operator) {
+        case '+':
+            tempResult = operation.var1 + operation.var2;
+            break;
+        case '-':
+            tempResult = operation.var1 - operation.var2;
+            break;
+        case '*':
+            tempResult = operation.var1 * operation.var2;
+            break;
+        case '/':
+            tempResult = operation.var1 / operation.var2;
+            break;
+    }
+    init(); //prepare data for next calculation
+    operation.var1 = Number(tempResult);
+    return tempResult;
+}
+
 init();
 
 /**
  * UI
  */
-$(function(){
+$(function() {
     var welcomeMsg = 'Welcome';
     var resultAvailable = false;
 
@@ -179,7 +179,7 @@ $(function(){
         }
     }
 
-    $(".number").on( "click", function() {
+    $(".number").on("click", function () {
         clearWelcomeMsg();
         clearErrorMsg();
 
@@ -193,12 +193,12 @@ $(function(){
         }
 
         //ignore 0 without any predecessor
-        if (this.id !== "key-0" ||  (this.id === "key-0" && !isEmpty($("#input").val()) || getOperator() !== undefined)) {
+        if (this.id !== "key-0" || (this.id === "key-0" && !isEmpty($("#input").val()) || getOperator() !== undefined)) {
             $("#input").append(number);
         }
     });
 
-    $(".operator").on( "click", function () {
+    $(".operator").on("click", function () {
         clearWelcomeMsg();
         clearErrorMsg();
 
@@ -238,7 +238,7 @@ $(function(){
         }
     });
 
-    $("#key-\\=").on( "click", function () {
+    $("#key-\\=").on("click", function () {
         var number = $("#input").val();
 
         try {
@@ -249,7 +249,7 @@ $(function(){
         }
     });
 
-    $("#key-c").on( "click", function() {
+    $("#key-c").on("click", function() {
         $("#output").val(welcomeMsg);
         $("#input").empty();
 
